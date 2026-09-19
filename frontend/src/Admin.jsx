@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
 
-const API_URL = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 function Admin() {
   // =========================
@@ -197,7 +197,6 @@ function Admin() {
     try {
       let imageUrl = null;
 
-      // Upload new image if selected
       if (imageFile) {
         imageUrl = await uploadImage();
 
@@ -214,7 +213,6 @@ function Admin() {
         category_id: categoryId || null,
       };
 
-      // Keep existing image while editing
       if (imageUrl) {
         productData.image_url = imageUrl;
       }
@@ -976,9 +974,7 @@ function Admin() {
       `}</style>
 
       <div className="admin-container">
-        {/* =========================
-            HEADER
-        ========================= */}
+        {/* HEADER */}
         <div className="admin-header">
           <div>
             <h1>Shadow Life Garments Item</h1>
@@ -990,9 +986,7 @@ function Admin() {
           </button>
         </div>
 
-        {/* =========================
-            SUMMARY CARDS
-        ========================= */}
+        {/* SUMMARY CARDS */}
         <div className="summary-grid">
           <div className="summary-card">
             <h3>Total Products</h3>
@@ -1015,9 +1009,7 @@ function Admin() {
           </div>
         </div>
 
-        {/* =========================
-            PRODUCT FORM
-        ========================= */}
+        {/* PRODUCT FORM */}
         <div className="section-card">
           <h2 className="section-title">
             {editingId ? "Edit Product" : "Add New Product"}
@@ -1148,9 +1140,7 @@ function Admin() {
           </form>
         </div>
 
-        {/* =========================
-            ORDERS
-        ========================= */}
+        {/* ORDERS */}
         <div className="section-card">
           <h2 className="section-title">Orders</h2>
 
@@ -1184,9 +1174,7 @@ function Admin() {
                       <td>
                         <div className="customer-info">
                           <strong>{order.customer_name}</strong>
-
                           <span>📞 {order.phone}</span>
-
                           <span>📍 {order.address}</span>
                         </div>
                       </td>
@@ -1218,45 +1206,10 @@ function Admin() {
                             backgroundColor: "#ffffff",
                           }}
                         >
-                          <option
-                            value="unpaid"
-                            style={{
-                              color: "#111827",
-                              backgroundColor: "#ffffff",
-                            }}
-                          >
-                            Unpaid
-                          </option>
-
-                          <option
-                            value="pending"
-                            style={{
-                              color: "#111827",
-                              backgroundColor: "#ffffff",
-                            }}
-                          >
-                            Pending
-                          </option>
-
-                          <option
-                            value="paid"
-                            style={{
-                              color: "#111827",
-                              backgroundColor: "#ffffff",
-                            }}
-                          >
-                            Paid
-                          </option>
-
-                          <option
-                            value="rejected"
-                            style={{
-                              color: "#111827",
-                              backgroundColor: "#ffffff",
-                            }}
-                          >
-                            Rejected
-                          </option>
+                          <option value="unpaid">Unpaid</option>
+                          <option value="pending">Pending</option>
+                          <option value="paid">Paid</option>
+                          <option value="rejected">Rejected</option>
                         </select>
                       </td>
 
@@ -1272,65 +1225,12 @@ function Admin() {
                             backgroundColor: "#ffffff",
                           }}
                         >
-                          <option
-                            value="pending"
-                            style={{
-                              color: "#111827",
-                              backgroundColor: "#ffffff",
-                            }}
-                          >
-                            Pending
-                          </option>
-
-                          <option
-                            value="confirmed"
-                            style={{
-                              color: "#111827",
-                              backgroundColor: "#ffffff",
-                            }}
-                          >
-                            Confirmed
-                          </option>
-
-                          <option
-                            value="processing"
-                            style={{
-                              color: "#111827",
-                              backgroundColor: "#ffffff",
-                            }}
-                          >
-                            Processing
-                          </option>
-
-                          <option
-                            value="shipped"
-                            style={{
-                              color: "#111827",
-                              backgroundColor: "#ffffff",
-                            }}
-                          >
-                            Shipped
-                          </option>
-
-                          <option
-                            value="delivered"
-                            style={{
-                              color: "#111827",
-                              backgroundColor: "#ffffff",
-                            }}
-                          >
-                            Delivered
-                          </option>
-
-                          <option
-                            value="cancelled"
-                            style={{
-                              color: "#111827",
-                              backgroundColor: "#ffffff",
-                            }}
-                          >
-                            Cancelled
-                          </option>
+                          <option value="pending">Pending</option>
+                          <option value="confirmed">Confirmed</option>
+                          <option value="processing">Processing</option>
+                          <option value="shipped">Shipped</option>
+                          <option value="delivered">Delivered</option>
+                          <option value="cancelled">Cancelled</option>
                         </select>
                       </td>
 
@@ -1352,9 +1252,7 @@ function Admin() {
           )}
         </div>
 
-        {/* =========================
-            ORDER DETAILS
-        ========================= */}
+        {/* ORDER DETAILS */}
         {selectedOrder && (
           <div className="section-card" id="order-details">
             <h2 className="section-title">Order Details</h2>
@@ -1486,9 +1384,7 @@ function Admin() {
           </div>
         )}
 
-        {/* =========================
-            PRODUCT CATALOG
-        ========================= */}
+        {/* PRODUCT CATALOG */}
         <div className="section-card">
           <h2 className="section-title">Product Catalog</h2>
 

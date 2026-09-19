@@ -6,6 +6,13 @@ import AdminLogin from "./AdminLogin";
 
 import { supabase } from "./supabaseClient";
 
+// =========================
+// BACKEND API URL
+// =========================
+// Uses the Vercel backend in production.
+// Falls back to localhost for local development.
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
@@ -73,7 +80,7 @@ function App() {
       return;
     }
 
-    fetch("http://localhost:5000/api/products")
+    fetch(`${API_URL}/api/products`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to load products");
@@ -226,7 +233,7 @@ function App() {
         quantity: item.quantity,
       }));
 
-      const response = await fetch("http://localhost:5000/api/orders", {
+      const response = await fetch(`${API_URL}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
