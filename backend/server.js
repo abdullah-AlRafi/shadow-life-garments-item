@@ -859,6 +859,13 @@ app.get("/api/test-supabase", async (req, res) => {
 // START SERVER
 // =========================
 
-app.listen(PORT, () => {
-  console.log(`Backend server running at http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(process.env.PORT || PORT, () => {
+    console.log(
+      `Backend server running at http://localhost:${process.env.PORT || PORT}`,
+    );
+  });
+}
+
+// Export Express app for Vercel
+module.exports = app;
